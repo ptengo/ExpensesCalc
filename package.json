@@ -1,0 +1,32 @@
+{
+  "name": "mec",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "react-scripts": "1.1.4"
+  },
+  "scripts": {
+    "start": "concurrently --kill-others \"webpack-dev-server --mode development\" \"react-scripts start\"",
+    "build": "webpack --mode production",
+    "dev": "webpack --mode development",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.4",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "concurrently": "^3.5.1",
+    "css-loader": "^0.28.11",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "prop-types": "^15.6.1",
+    "react": "^16.4.0",
+    "react-dom": "^16.4.0",
+    "style-loader": "^0.21.0",
+    "webpack": "^4.10.1",
+    "webpack-cli": "^2.1.4",
+    "webpack-command": "^0.2.0",
+    "webpack-dev-server": "^3.1.4"
+  }
+}
