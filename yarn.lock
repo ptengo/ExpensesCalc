@@ -2,6 +2,10 @@
 # yarn lockfile v1
 
 
+"8@0.0.1":
+  version "0.0.1"
+  resolved "http://nexus.innofis.local/repository/npm-all/8/-/8-0.0.1.tgz#27d049aaac32267b9c7377b9472bf2df15b53e28"
+
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
   resolved "http://nexus.innofis.local/repository/npm-all/@mrmlnc/readdir-enhanced/-/readdir-enhanced-2.2.1.tgz#524af240d1a360527b730475ecfa1344aa540dde"
