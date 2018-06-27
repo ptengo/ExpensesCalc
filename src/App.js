@@ -1,47 +1,46 @@
 import React, { Component } from 'react';
-import { Router, browserHistory, Route, Link } from 'react-router';
-import './App.css';
-
-const Page = ({ title }) => (
-    <div className="App">
-      <div className="App-header">
-        <h2>{title}</h2>
-      </div>
-      <p className="App-intro">
-        This is the {title} page.
-      </p>
-      <p>
-        <Link to="/">Home</Link>
-      </p>
-      <p>
-        <Link to="/about">About</Link>
-      </p>
-      <p>
-        <Link to="/settings">Settings</Link>
-      </p>
-    </div>
-);
-
-const Home = (props) => (
-  <Page title="Home"/>
-);
-
-const About = (props) => (
-  <Page title="About"/>
-);
-
-const Settings = (props) => (
-  <Page title="Settings"/>
-);
-
+import ReminderList from './components/reminderList.component';
+import ReminderForm from './components/reminderForm.component';
+import ButtonForm from './components/button-form.component';
 class App extends Component {
+  constructor() {
+    super();
+    this.id = 1;
+    this.state = {
+      reminders: [],
+      buttons: [{ name: 'Delete All', key: 'deleteAll' }]
+    };
+  }
+
+  buttonsHandler(buttonData) {
+    console.log('buttonData', buttonData);
+    if (buttonData.key === 'deleteAll') {
+      this.setState({ reminders: [] })
+    }
+  }
+
+  handleOnAddReminder(data) {
+    let reminder = { id: this.id };
+    Object.keys(data).forEach(key => {
+      reminder[key] = data[key];
+    });
+    this.id++;
+    this.setState({
+      reminders: this.state.reminders.concat([reminder])
+    });
+  }
+
   render() {
     return (
-      <Router history={browserHistory}>
-        <Route path="/" component={Home}/>
-        <Route path="/about" component={About}/>
-        <Route path="/settings" component={Settings}/>
-      </Router>
+      <div>
+        <ReminderList reminders={this.state.reminders} />
+        <ReminderForm onAddReminder={this.handleOnAddReminder.bind(this)} />
+        {/* {this.state.form ? <Form group={this.state.form.group}>
+          <input type="text" name="name" />
+        </Form> : null} */}
+
+        <ButtonForm buttons={this.state.buttons} handleButtons={this.buttonsHandler.bind(this)} />
+      </div>
     );
   }
 }
