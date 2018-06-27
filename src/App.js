@@ -1,42 +1,47 @@
 import React, { Component } from 'react';
-import ReminderList from './components/reminderList.component';
-import ReminderForm from './components/reminderForm.component';
-import ButtonForm from './components/button-form.component';
+import { Router, browserHistory, Route, Link } from 'react-router';
+import './App.css';
+
+const Page = ({ title }) => (
+    <div className="App">
+      <div className="App-header">
+        <h2>{title}</h2>
+      </div>
+      <p className="App-intro">
+        This is the {title} page.
+      </p>
+      <p>
+        <Link to="/">Home</Link>
+      </p>
+      <p>
+        <Link to="/about">About</Link>
+      </p>
+      <p>
+        <Link to="/settings">Settings</Link>
+      </p>
+    </div>
+);
+
+const Home = (props) => (
+  <Page title="Home"/>
+);
+
+const About = (props) => (
+  <Page title="About"/>
+);
+
+const Settings = (props) => (
+  <Page title="Settings"/>
+);
+
 class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      reminders: [
-        { id: 1, title: "title1", description: "desc1" },
-        { id: 2, title: "title2", description: "desc2" }
-      ],
-      buttonData: { name: 'Delete All' }
-    };
-  }
-
-  buttonsHandler(event) {
-    event.preventDefault();
-    this.setState({ reminders: [] })
-  }
-
-  handleOnAddReminder(event) {
-    event.preventDefault();
-    let reminder = {
-      title: event.target.title.value,
-      description: event.target.description.value
-    };
-    this.setState({
-      reminders: this.state.reminders.concat([reminder])
-    });
-  }
-
   render() {
     return (
-      <div>
-        <ReminderList reminders={this.state.reminders} />
-        <ReminderForm onAddReminder={this.handleOnAddReminder.bind(this)} />
-        <ButtonForm buttonData={this.state.buttonData} handleButtons={this.buttonsHandler.bind(this)} />
-      </div>
+      <Router history={browserHistory}>
+        <Route path="/" component={Home}/>
+        <Route path="/about" component={About}/>
+        <Route path="/settings" component={Settings}/>
+      </Router>
     );
   }
 }
